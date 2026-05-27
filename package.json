@@ -1,0 +1,42 @@
+{
+  "name": "node-livid",
+  "version": "1.0.0",
+  "description": "Node.js Livid 风格后台管理系统",
+  "main": "src/app.js",
+  "scripts": {
+    "start": "node src/app.js",
+    "dev": "nodemon src/app.js",
+    "db:init": "node src/db/init.js",
+    "db:seed": "node src/db/seed.js",
+    "db:create-audit-log": "node src/db/createAuditLogTable.js"
+  },
+  "keywords": [
+    "livid",
+    "node",
+    "express",
+    "admin"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "archiver": "^7.0.1",
+    "bcryptjs": "^3.0.3",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "express-validator": "^7.3.2",
+    "ioredis": "^5.11.0",
+    "jsonwebtoken": "^9.0.3",
+    "morgan": "^1.10.1",
+    "mysql2": "^3.22.4",
+    "sequelize": "^6.37.8",
+    "svg-captcha": "^1.4.0",
+    "swagger-jsdoc": "^6.3.0",
+    "swagger-ui-dist": "^5.32.6",
+    "swagger-ui-express": "^5.0.1",
+    "uuid": "^14.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  }
+}

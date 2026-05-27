@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Node RuoYi - API 文档</title>
+  <link rel="stylesheet" href="/swagger-ui/swagger-ui.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background: #f5f5f5;
+    }
+
+    .knife4j-container {
+      display: flex;
+      height: 100vh;
+    }
+
+    .knife4j-sidebar {
+      width: 280px;
+      background: #1e1e2d;
+      color: #fff;
+      overflow-y: auto;
+      flex-shrink: 0;
+    }
+
+    .knife4j-sidebar-header {
+      padding: 20px;
+      background: #1a1a2e;
+      border-bottom: 1px solid #2d2d44;
+    }
+
+    .knife4j-sidebar-header h1 {
+      font-size: 18px;
+      font-weight: 600;
+      color: #fff;
+    }
+
+    .knife4j-sidebar-header p {
+      font-size: 12px;
+      color: #8a8a9a;
+      margin-top: 5px;
+    }
+
+    .knife4j-search {
+      padding: 15px 20px;
+      border-bottom: 1px solid #2d2d44;
+    }
+
+    .knife4j-search input {
+      width: 100%;
+      padding: 8px 12px;
+      border: 1px solid #3d3d5c;
+      border-radius: 4px;
+      background: #2d2d44;
+      color: #fff;
+      font-size: 14px;
+      outline: none;
+    }
+
+    .knife4j-search input::placeholder {
+      color: #6d6d8a;
+    }
+
+    .knife4j-search input:focus {
+      border-color: #1890ff;
+    }
+
+    .knife4j-menu {
+      padding: 10px 0;
+    }
+
+    .knife4j-menu-group {
+      margin-bottom: 5px;
+    }
+
+    .knife4j-menu-group-title {
+      padding: 10px 20px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #8a8a9a;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .knife4j-menu-group-title:hover {
+      color: #fff;
+    }
+
+    .knife4j-menu-group-title .arrow {
+      transition: transform 0.3s;
+    }
+
+    .knife4j-menu-group-title .arrow.collapsed {
+      transform: rotate(-90deg);
+    }
+
+    .knife4j-menu-items {
+      overflow: hidden;
+    }
+
+    .knife4j-menu-items.collapsed {
+      display: none;
+    }
+
+    .knife4j-menu-item {
+      padding: 8px 20px 8px 35px;
+      font-size: 13px;
+      color: #b8b8cc;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      transition: all 0.3s;
+    }
+
+    .knife4j-menu-item:hover {
+      color: #fff;
+      background: #2d2d44;
+    }
+
+    .knife4j-menu-item.active {
+      color: #fff;
+      background: #1890ff;
+    }
+
+    .knife4j-method-tag {
+      display: inline-block;
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-size: 10px;
+      font-weight: 600;
+      margin-right: 8px;
+      min-width: 40px;
+      text-align: center;
+    }
+
+    .method-get {
+      background: #61affe;
+      color: #fff;
+    }
+
+    .method-post {
+      background: #49cc90;
+      color: #fff;
+    }
+
+    .method-put {
+      background: #fca130;
+      color: #fff;
+    }
+
+    .method-delete {
+      background: #f93e3e;
+      color: #fff;
+    }
+
+    .knife4j-content {
+      flex: 1;
+      overflow-y: auto;
+      background: #fff;
+    }
+
+    .knife4j-welcome {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      color: #666;
+    }
+
+    .knife4j-welcome h2 {
+      font-size: 24px;
+      margin-bottom: 10px;
+      color: #333;
+    }
+
+    .knife4j-welcome p {
+      font-size: 14px;
+      color: #888;
+    }
+
+    .swagger-ui .topbar {
+      display: none;
+    }
+
+    .swagger-ui .info {
+      margin: 20px 0;
+    }
+
+    .swagger-ui .scheme-container {
+      background: #fafafa;
+      padding: 15px;
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="knife4j-container">
+    <div class="knife4j-sidebar">
+      <div class="knife4j-sidebar-header">
+        <h1>Node RuoYi API</h1>
+        <p>版本 1.0.0</p>
+      </div>
+      <div class="knife4j-search">
+        <input type="text" id="apiSearch" placeholder="搜索接口...">
+      </div>
+      <div class="knife4j-menu" id="apiMenu"></div>
+    </div>
+    <div class="knife4j-content">
+      <div id="swagger-ui"></div>
+    </div>
+  </div>
+
+  <script src="/swagger-ui/swagger-ui-bundle.js"></script>
+  <script src="/swagger-ui/swagger-ui-standalone-preset.js"></script>
+  <script>
+    window.onload = function() {
+      const ui = SwaggerUIBundle({
+        url: '/api-docs-json',
+        dom_id: '#swagger-ui',
+        deepLinking: true,
+        presets: [
+          SwaggerUIBundle.presets.apis,
+          SwaggerUIStandalonePreset
+        ],
+        plugins: [
+          SwaggerUIBundle.plugins.DownloadUrl
+        ],
+        layout: 'StandaloneLayout',
+        docExpansion: 'none',
+        filter: true,
+        showRequestHeaders: true,
+        showCommonExtensions: true,
+        syntaxHighlight: {
+          activate: true,
+          theme: 'monokai'
+        }
+      });
+
+      fetch('/api-docs-json')
+        .then(response => response.json())
+        .then(spec => {
+          buildSidebarMenu(spec);
+        })
+        .catch(err => console.error('Failed to load API spec:', err));
+    };
+
+    function buildSidebarMenu(spec) {
+      const menu = document.getElementById('apiMenu');
+      const paths = spec.paths || {};
+      const groups = {};
+
+      Object.keys(paths).forEach(path => {
+        const pathItem = paths[path];
+        Object.keys(pathItem).forEach(method => {
+          if (['get', 'post', 'put', 'delete', 'patch'].includes(method)) {
+            const operation = pathItem[method];
+            const tags = operation.tags || ['default'];
+            const tag = tags[0];
+
+            if (!groups[tag]) {
+              groups[tag] = [];
+            }
+
+            groups[tag].push({
+              method: method.toUpperCase(),
+              path: path,
+              summary: operation.summary || path
+            });
+          }
+        });
+      });
+
+      let html = '';
+      Object.keys(groups).forEach(group => {
+        html += `
+          <div class="knife4j-menu-group">
+            <div class="knife4j-menu-group-title" onclick="toggleGroup(this)">
+              <span>${group}</span>
+              <span class="arrow">▼</span>
+            </div>
+            <div class="knife4j-menu-items">
+        `;
+
+        groups[group].forEach(api => {
+          const methodClass = 'method-' + api.method.toLowerCase();
+          html += `
+            <div class="knife4j-menu-item" onclick="scrollToApi('${api.method}', '${api.path}')">
+              <span class="knife4j-method-tag ${methodClass}">${api.method}</span>
+              <span>${api.summary}</span>
+            </div>
+          `;
+        });
+
+        html += `
+            </div>
+          </div>
+        `;
+      });
+
+      menu.innerHTML = html;
+    }
+
+    function toggleGroup(element) {
+      const items = element.nextElementSibling;
+      const arrow = element.querySelector('.arrow');
+      items.classList.toggle('collapsed');
+      arrow.classList.toggle('collapsed');
+    }
+
+    function scrollToApi(method, path) {
+      const operationId = `${method.toLowerCase()}-${path.replace(/[\/\{\}]/g, '-')}`;
+      const element = document.querySelector(`[id*="${operationId}"]`) ||
+                     document.querySelector(`.opblock-summary-${method.toLowerCase()}`);
+      
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+
+    document.getElementById('apiSearch').addEventListener('input', function(e) {
+      const searchTerm = e.target.value.toLowerCase();
+      const items = document.querySelectorAll('.knife4j-menu-item');
+      
+      items.forEach(item => {
+        const text = item.textContent.toLowerCase();
+        const parent = item.closest('.knife4j-menu-group');
+        
+        if (text.includes(searchTerm) || searchTerm === '') {
+          item.style.display = 'flex';
+          if (parent) {
+            parent.style.display = 'block';
+            const itemsContainer = parent.querySelector('.knife4j-menu-items');
+            if (itemsContainer) {
+              itemsContainer.classList.remove('collapsed');
+            }
+          }
+        } else {
+          item.style.display = 'none';
+        }
+      });
+
+      document.querySelectorAll('.knife4j-menu-group').forEach(group => {
+        const visibleItems = group.querySelectorAll('.knife4j-menu-item[style="display: flex"]');
+        if (visibleItems.length === 0 && searchTerm !== '') {
+          group.style.display = 'none';
+        }
+      });
+    });
+  </script>
+</body>
+</html>
